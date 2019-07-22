@@ -11,7 +11,7 @@ class CalcController{
     }
 
     set displayCalc(valor){
-        this.displayCalc = valor;
+        this.displayCalc = valor
     }
 
     get dataAtual(){
