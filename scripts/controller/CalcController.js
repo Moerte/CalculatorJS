@@ -15,7 +15,7 @@ class CalcController{
     }
 
     get dataAtual(){
-        return this._dataAtual
+        return this._dataAtual;
     }
 
     set dataAtual(valor){
