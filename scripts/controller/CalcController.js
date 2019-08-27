@@ -7,10 +7,11 @@ class CalcController {
         this._displayCalEl = document.querySelector("#display");
         this._dateEl = document.querySelector("#data");
         this._timeEl = document.querySelector("#hora");
-        
         this._currentDate;
         this.initialize();
         this.initButtonsEvents();
+        //TODO contruir tudo
+
     }
 
     initialize() {
@@ -22,7 +23,12 @@ class CalcController {
             this.setDisplayDateTime();
 
         }, 1000);
+
+        this.setLastNumberToDisplay();
+
     }
+
+
 
     addEventListenerAll(element, events, fn) {
 
@@ -33,9 +39,11 @@ class CalcController {
     }
     clearAll() {
         this._operation = [];
+        this.setLastNumberToDisplay();
     }
     clearEntry() {
         this._operation.pop();
+        this.setLastNumberToDisplay();
     }
     _setLastOperation(value) {
         this._operation[this._operation.length - 1] = value;
@@ -64,7 +72,13 @@ class CalcController {
 
         let last = this._operation.pop();
         let result = eval(this._operation.join(""));
-        this._operation = [result, last];
+        if (last == '%') {
+            result /= 100;
+            this._operation = [result];
+        } else {
+            this._operation = [result, last];
+        }
+
         this.setLastNumberToDisplay();
 
     }
@@ -80,6 +94,9 @@ class CalcController {
                 break;
             }
         }
+
+        if(!lastNumber) lastNumber = 0;
+
         this.displayCalc = lastNumber;
     }
 
